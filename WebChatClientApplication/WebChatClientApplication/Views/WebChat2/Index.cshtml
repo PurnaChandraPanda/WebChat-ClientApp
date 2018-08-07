@@ -1,0 +1,37 @@
+﻿@using System.Configuration
+@model WebChatClientApplication.Models.WebChat2Model
+
+@{
+    ViewBag.Title = "WebChat DirectLine client";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WebChat DirectLine client</title>
+    <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+        <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+</head>
+<body>
+    <div>
+        <div id="bot" style="max-width:100px;margin-top:80px;min-height:300px;" />
+    </div>
+</body>
+
+<script>
+        var botConnection = new BotChat.DirectLine({
+            token: '@Model.Token'
+        });
+
+          BotChat.App({
+            directLine: { secret: '@Model.Token' },
+            user: { id: "UserId91", name: "Unknown" },
+            botConnection: botConnection,
+            bot: { id: '@ConfigurationManager.AppSettings["BotId"]' },
+            resize: 'detect'
+          }, document.getElementById("bot"));
+</script>
+
+</html>
+

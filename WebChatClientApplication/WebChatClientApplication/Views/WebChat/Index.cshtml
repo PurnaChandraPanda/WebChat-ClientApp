@@ -1,0 +1,40 @@
+﻿@model WebChatClientApplication.Models.WebChatModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @*<link href="https://unpkg.com/botframework-webchat/botchat.css" rel="stylesheet" />
+        <script src="https://unpkg.com/botframework-webchat/botchat.js"></script>*@
+    @*<link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+        <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>*@    
+    <link href="https://cdn.botframework.com/botframework-webchat/0.13.1-master.ea2166a/botchat.css" rel="stylesheet" />
+    <script src="https://cdn.botframework.com/botframework-webchat/0.13.1-master.ea2166a/botchat.js"></script>
+</head>
+<body>
+    <div>
+        <div id="bot" style="max-width:300px;margin-top:80px;min-height:500px;" />
+    </div>
+</body>
+
+<script>
+        var botConnection = new BotChat.DirectLine({
+            token: '@Model.Token'
+        });
+
+          BotChat.App({
+            directLine: { secret: '@Model.Token' },
+            user: { id: "UserId", name: "Unknown" },
+            botConnection: botConnection,
+            bot: { id: '@System.Configuration.ConfigurationManager.AppSettings["BotId"]' },
+            resize: 'detect'
+          }, document.getElementById("bot"));
+</script>
+
+</html>
+
