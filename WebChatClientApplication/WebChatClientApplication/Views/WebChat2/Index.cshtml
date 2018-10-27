@@ -11,27 +11,70 @@
     <meta name="viewport" content="width=device-width" />
     <title>WebChat DirectLine client</title>
     <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
-        <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/CognitiveServices.js"></script>
+    
 </head>
 <body>
     <div>
         <div id="bot" style="max-width:100px;margin-top:80px;min-height:300px;" />
     </div>
+
+    <script>
+
+    // If userid and username values are passed in query string of the view page, it can read the values dynamically and make call.
+    // The end-user would call the view page with URL as http://localhost:4208/WebChat2/Index?userid=user23&username=me for example.
+    // Review the blog - https://blogs.msdn.microsoft.com/geoffreyinnis/2017/06/28/the-intelligent-agent-assistant-bots-in-the-agent-desktop-part-1/ for more details.
+    // There is an OR condition provided if it is provided in query string, app would read dynamically. Otherwise,
+    var params = BotChat.queryParams(location.search);
+    var userDetails = {
+        id: params['userid'] || 'userid',
+        name: params['username'] || 'username'
+    };
+
+    // Hard-coded userid and username information for App call.
+    //var userDetails = {
+    //    id: "UserId91",
+    //    name: "Unknown"
+    //};
+
+    var botConnection = new BotChat.DirectLine({
+            token: '@Model.Token'
+    });
+
+       // Option for speech support (in Chrome only): Native browser speech (not supported by all browsers, no speech recognition priming support)
+       //var speechOptions = {
+       //  speechRecognizer: new BotChat.Speech.BrowserSpeechRecognizer(),
+       //  speechSynthesizer: new BotChat.Speech.BrowserSpeechSynthesizer()
+       //};
+
+    // Got the localization hint from https://github.com/Microsoft/BotFramework-WebChat/issues/1179
+    // Option for speech support (cross-browser)
+    var speechOptions = {
+        speechRecognizer: new CognitiveServices.SpeechRecognizer({
+            subscriptionKey: '@ConfigurationManager.AppSettings["bing-speech-api"]',
+            locale: 'de-DE'
+        }),
+        speechSynthesizer: new CognitiveServices.SpeechSynthesizer({
+            //gender: CognitiveServices.SyntheisGender.Female,
+            subscriptionKey: '@ConfigurationManager.AppSettings["bing-speech-api"]',
+            voiceName: 'Microsoft Server Speech Text to Speech Voice (de-DE, Stefan, Apollo)'
+        })
+    };
+
+    BotChat.App({
+        directLine: { secret: '@Model.Token' },
+        locale: 'de-DE', // locale defaults to 'en-US'
+        user: userDetails,
+        botConnection: botConnection,
+        speechOptions: speechOptions, // comment speechOptions property if speech is not in concern
+        bot: { id: '@ConfigurationManager.AppSettings["BotId"]' },
+        resize: 'detect'
+    }, document.getElementById("bot"));
+    </script>
+
 </body>
 
-<script>
-        var botConnection = new BotChat.DirectLine({
-            token: '@Model.Token'
-        });
 
-          BotChat.App({
-            directLine: { secret: '@Model.Token' },
-            user: { id: "UserId91", name: "Unknown" },
-            botConnection: botConnection,
-            bot: { id: '@ConfigurationManager.AppSettings["BotId"]' },
-            resize: 'detect'
-          }, document.getElementById("bot"));
-</script>
 
 </html>
-
