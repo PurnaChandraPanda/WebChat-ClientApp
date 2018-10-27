@@ -12,7 +12,7 @@ The recommendation is to ensure secret is secured in either case.
     var speechOptions = {
         speechRecognizer: new CognitiveServices.SpeechRecognizer({
             subscriptionKey: '@ConfigurationManager.AppSettings["bing-speech-api"]',
-            locale: 'de-DE'
+            locale: 'de-DE' // locale is optional - if needed other than english, provide correct locale alias
         }),
         speechSynthesizer: new CognitiveServices.SpeechSynthesizer({
             //gender: CognitiveServices.SyntheisGender.Female,
@@ -23,7 +23,7 @@ The recommendation is to ensure secret is secured in either case.
 
     BotChat.App({
         directLine: { secret: '@Model.Token' },
-        locale: 'de-DE', // locale defaults to 'en-US'
+        locale: 'de-DE', // locale defaults to 'en-US' - provide correct locale alias if really needed
         user: userDetails,
         botConnection: botConnection,
         speechOptions: speechOptions, // comment speechOptions property if speech is not in concern
