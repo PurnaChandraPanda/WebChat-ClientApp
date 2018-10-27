@@ -8,7 +8,7 @@ The recommendation is to ensure secret is secured in either case.
 
 ## Updated logic for speech support
 
-'''
+```
     var speechOptions = {
         speechRecognizer: new CognitiveServices.SpeechRecognizer({
             subscriptionKey: '@ConfigurationManager.AppSettings["bing-speech-api"]',
@@ -31,5 +31,5 @@ The recommendation is to ensure secret is secured in either case.
         resize: 'detect'
     }, document.getElementById("bot"));
     </script>
-'''
+```
 
