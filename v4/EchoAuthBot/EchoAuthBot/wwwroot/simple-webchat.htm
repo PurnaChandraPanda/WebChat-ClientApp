@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+    <h1>Index</h1>
+
+    <div id="webchat" role="main"></div>
+    <script src="https://cdn.botframework.com/botframework-webchat/master/webchat.js"></script>
+    <script>
+        // Get welcome message
+        // We are using a customized store to add hooks to connect event
+        const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
+            
+            if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+                console.log(action);
+                dispatch({
+                    type: 'WEB_CHAT/SEND_EVENT',
+                    payload: {
+                        name: 'webchat/join',
+                        value: { language: window.navigator.language }
+                    }
+                });
+            }
+
+            return next(action);
+        });
+
+        // Set the StyleOptions for avatar
+        const styleOptions = {
+            botAvatarInitials: 'WC',
+            userAvatarInitials: 'WW'
+        };
+
+        // Render the webchat control
+        window.WebChat.renderWebChat({
+            directLine: window.WebChat.createDirectLine({ token: 'IJvT3Hlux2k.0My59WSrDYt9zRfLUtXtX4zPAMwGhbULlSB4D2cjE-0' }),
+            store,
+            userID: 'YOUR_USER_ID',
+            username: 'Web Chat User',
+            locale: 'en-US',
+            styleOptions
+        }, document.getElementById('webchat'));
+
+        document.querySelector('#webchat > *').focus();
+    </script>
+</body>
+</html>
