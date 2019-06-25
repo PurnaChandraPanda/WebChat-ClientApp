@@ -65,7 +65,7 @@ Waterfall dialog flow steps' configuration in `MainDialog.cs`.
 ```
 
 The client side token generation for the View page in `HomeController.cs`.
-```
+```diff
 	public async Task<IActionResult> Index()
         {
             var request = new HttpRequestMessage(
