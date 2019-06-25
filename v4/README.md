@@ -68,10 +68,10 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Copy the secret key
 - Add trusted origin for client side URI to host name (if focus is to by-pass the manual magic code copy) as following
 	![DirectLine settings](https://github.com/PurnaChandraPanda/WebChat-ClientApp/blob/master/v4/Media/directline-settings.JPG)
-- Controller logic is [here](./ClientApp/HomeController.cs#28)
-- View page is [here](./Views/Home/Index.cshtml)
+- Controller logic is [here](./EchoAuthBot/EchoAuthBot/ClientApp/HomeController.cs#28)
+- View page is [here](./EchoAuthBot/EchoAuthBot/Views/Home/Index.cshtml)
 - Under trusted origin, add https://directline.botframework.com/ if interested to make direct test than via view page
-- Simple webchat page example is [here](./wwwroot/simple-webchat.htm) - out here, had to use WebChat secret key because of trusted origin restriction added on DirectLine
+- Simple webchat page example is [here](./EchoAuthBot/EchoAuthBot/wwwroot/simple-webchat.htm) - out here, had to use WebChat secret key because of trusted origin restriction added on DirectLine
 
 ## Deploy the bot to Azure
 
