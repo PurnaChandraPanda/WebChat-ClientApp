@@ -67,7 +67,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Create DirectLine channel registration
 - Copy the secret key
 - Add trusted origin for client side URI to host name (if focus is to by-pass the manual magic code copy) as following
-	![DirectLine settings](../../Media/directline-settings.jpg)
+	![DirectLine settings](https://github.com/PurnaChandraPanda/WebChat-ClientApp/blob/master/v4/Media/directline-settings.JPG)
 - Controller logic is [here](./ClientApp/HomeController.cs#28)
 - View page is [here](./Views/Home/Index.cshtml)
 
