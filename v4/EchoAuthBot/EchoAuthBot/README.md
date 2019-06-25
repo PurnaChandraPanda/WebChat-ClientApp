@@ -59,8 +59,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Create an ngrok based URI for local testing as [here](https://blog.botframework.com/2017/10/19/debug-channel-locally-using-ngrok/)
 - File -> Open Bot
 - Enter a Bot URL of `http://<ngrok-forward-uri>/api/messages`
-- Enter earlier copied optional appid/ password values.
-- You can test the OAuth flow in emulator then.
+- Enter earlier copied optional appid/ password values
+- You can test the OAuth flow in emulator then
 
 ## Test DirectLine flow
 
@@ -70,7 +70,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 	![DirectLine settings](https://github.com/PurnaChandraPanda/WebChat-ClientApp/blob/master/v4/Media/directline-settings.JPG)
 - Controller logic is [here](./ClientApp/HomeController.cs#28)
 - View page is [here](./Views/Home/Index.cshtml)
-
+- Under trusted origin, add https://directline.botframework.com/ if interested to make direct test than via view page
+- Simple webchat page example is [here](./wwwroot/simple-webchat.htm) - out here, had to use WebChat secret key because of trusted origin restriction added on DirectLine
 
 ## Deploy the bot to Azure
 
